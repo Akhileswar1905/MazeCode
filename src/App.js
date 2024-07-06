@@ -12,11 +12,8 @@ const App = () => {
     <Router>
       <div className="App">
         <Routes>
-          <Route
-            path="/"
-            element={<ProtectedRoute element={GraphComponent} />}
-          />
-          <Route path="/end" element={<ProtectedRoute element={EndPage} />} />
+          <Route path="/" element={<GraphComponent />} />
+          <Route path="/end" element={<EndPage />} />
           <Route path="/auth" element={<SignUp />} />
           <Route path="/login" element={<Signin />} />
         </Routes>
