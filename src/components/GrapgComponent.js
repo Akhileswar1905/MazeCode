@@ -31,20 +31,21 @@ const GraphComponent = () => {
   const navigate = useNavigate();
   const [graphData, setGraphData] = useState({ nodes: [], links: [] });
   const [solvedNodes, setSolvedNodes] = useState([]);
-
+  const [disable, setDisable] = useState(false);
   useEffect(() => {
     setGraphData(data);
   }, []);
 
   const handleStart = async () => {
-    window.open(localStorage.getItem("link"));
+    if (!disable) {
+      window.open(localStorage.getItem("link"));
+      setDisable(true);
+    }
   };
 
   const handleClick = (nodeId) => {
     console.log(nodeId);
     const node = graphData.nodes.find((node) => {
-      //   console.log(typeof node.id, typeof nodeId);
-      //   console.log(node.id.toString() === nodeId);
       if (node.id.toString() === nodeId) {
         return true;
       }
@@ -101,7 +102,9 @@ const GraphComponent = () => {
   return (
     <div className="container">
       <div className="button-container">
-        <button onClick={handleStart}>Start</button>
+        <button onClick={handleStart} disabled={disable}>
+          Start
+        </button>
       </div>
       <div className="graph-container">
         <Graph
@@ -111,7 +114,7 @@ const GraphComponent = () => {
           onClickNode={handleClick}
         />
       </div>
-      <div className="button-container" style={{ backgroundColor: "#0e0e0e" }}>
+      <div className="button-container">
         <button onClick={() => navigate("/end")}>End</button>
       </div>
     </div>

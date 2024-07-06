@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./styles.css";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-const SignIn = () => {
+const SignUp = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -40,14 +40,14 @@ const SignIn = () => {
       );
 
       localStorage.setItem("link", res.data.test_link);
-      navigate("/");
+      navigate("/login");
     }
   };
 
   return (
     <div className="auth_container">
       <form onSubmit={handleSubmit}>
-        <h1>Sign In</h1>
+        <h1>Sign Up</h1>
 
         <div className="label">
           <label htmlFor="name">Full Name</label>
@@ -71,9 +71,12 @@ const SignIn = () => {
         </div>
 
         <button>Next</button>
+        <p>
+          Already registerd? <Link to={"/login"}>Sign In</Link>
+        </p>
       </form>
     </div>
   );
 };
 
-export default SignIn;
+export default SignUp;
